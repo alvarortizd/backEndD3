@@ -18,7 +18,7 @@ class ParkingController {
         return await parkingService.updateParking(parking);
     }
 
-    async deleteUser(parkingId) {
+    async deleteParking(parkingId) {
         logger.info('Controller: deleteUser', parkingId);
         return await parkingService.deleteParking(parkingId);
     }

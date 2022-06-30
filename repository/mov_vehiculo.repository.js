@@ -2,46 +2,46 @@ const { connect } = require('../config/db.config');
 const logger = require('../logger/api.logger');
 
 
-class UserRepository {
+class VehiculoRepository {
 
     db = {};
 
     constructor() {
         this.db = connect();
         // For Development
-        this.db.sequelize.sync({ force: true }).then(() => {
-            console.log("Drop and re-sync db.");
-        });
+      //  this.db.sequelize.sync({ force: true }).then(() => {
+     //       console.log("Drop and re-sync db.");
+       // });
     }
 
-    async getUser() {
+    async getVehiculo() {
 
         try {
-            const users = await this.db.user.findAll();
-            console.log('users:::', users);
-            return users;
+            const vehiculo = await this.db.vehiculo.findAll();
+            console.log('vehiculo:::', vehiculo);
+            return vehiculo;
         } catch (err) {
             console.log(err);
             return [];
         }
     }
 
-    async createUser(user) {
+    async createVehiculo(vehiculo) {
         let data = {};
         try {
-            data = await this.db.user.create(user);
+            data = await this.db.vehiculo.create(vehiculo);
         } catch(err) {
             logger.error('Error::' + err);
         }
         return data;
     }
 
-    async updateUser(user) {
+    async updateVehiculo(vehiculo) {
         let data = {};
         try {
-            data = await this.db.user.update({...user}, {
+            data = await this.db.vehiculo.update({...vehiculo}, {
                 where: {
-                    id_usurio: user.id_usurio
+                    id_vehiculo: vehiculo.id_vehiculo
                 }
             });
         } catch(err) {
@@ -50,12 +50,12 @@ class UserRepository {
         return data;
     }
 
-    async deleteUser(userId) {
+    async deleteVehiculo(vehiculoId) {
         let data = {};
         try {
-            data = await this.db.user.destroy({
+            data = await this.db.vehiculo.destroy({
                 where: {
-                    id_usurio: userId
+                    id_vehiculo: vehiculoId
                 }
             });
         } catch(err) {
@@ -67,4 +67,4 @@ class UserRepository {
 
 }
 
-module.exports = new UserRepository();
+module.exports = new VehiculoRepository();

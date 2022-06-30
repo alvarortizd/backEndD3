@@ -2,46 +2,46 @@ const { connect } = require('../config/db.config');
 const logger = require('../logger/api.logger');
 
 
-class UserRepository {
+class ClienteRepository {
 
     db = {};
 
     constructor() {
         this.db = connect();
         // For Development
-        this.db.sequelize.sync({ force: true }).then(() => {
-            console.log("Drop and re-sync db.");
-        });
+     //   this.db.sequelize.sync({ force: true }).then(() => {
+      //      console.log("Drop and re-sync db.");
+       // });
     }
 
-    async getUser() {
+    async getCliente() {
 
         try {
-            const users = await this.db.user.findAll();
-            console.log('users:::', users);
-            return users;
+            const cliente = await this.db.cliente.findAll();
+            console.log('tasks:::', cliente);
+            return cliente;
         } catch (err) {
             console.log(err);
             return [];
         }
     }
 
-    async createUser(user) {
+    async createCliente(cliente) {
         let data = {};
         try {
-            data = await this.db.user.create(user);
+            data = await this.db.cliente.create(cliente);
         } catch(err) {
             logger.error('Error::' + err);
         }
         return data;
     }
 
-    async updateUser(user) {
+    async updateCliente(cliente) {
         let data = {};
         try {
-            data = await this.db.user.update({...user}, {
+            data = await this.db.cliente.update({...cliente}, {
                 where: {
-                    id_usurio: user.id_usurio
+                    id_cliente: cliente.id_cliente
                 }
             });
         } catch(err) {
@@ -50,12 +50,12 @@ class UserRepository {
         return data;
     }
 
-    async deleteUser(userId) {
+    async deleteCliente(clienteId) {
         let data = {};
         try {
-            data = await this.db.user.destroy({
+            data = await this.db.cliente.destroy({
                 where: {
-                    id_usurio: userId
+                    id_cliente: clienteId
                 }
             });
         } catch(err) {
@@ -67,4 +67,4 @@ class UserRepository {
 
 }
 
-module.exports = new UserRepository();
+module.exports = new ClienteRepository();

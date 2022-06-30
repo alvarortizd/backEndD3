@@ -1,38 +1,27 @@
 module.exports = (sequelize, DataTypes, Model) => {
 
-    class Parking extends Model {}
+    class def_forma_pago extends Model {}
 
-    Parking.init({
+    def_forma_pago.init({
         // Model attributes are defined here
-        id: {
+        id_forma_pago: {
             type: DataTypes.INTEGER,
             allowNull: false,
             primaryKey:true
         },
-        color: {
+        desc_forma_pago: {
             type: DataTypes.STRING
             // allowNull defaults to true
         },
-        estado: {
-            type: DataTypes.STRING
-            // allowNull defaults to true
-        },
-        x: {
+        descuento: {
             type: DataTypes.INTEGER
             // allowNull defaults to true
         },
-        y: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },columna: {
-            type: DataTypes.STRING,
-            allowNull: false
-        }
     }, {
         // Other model options go here
         sequelize, // We need to pass the connection instance
-        modelName: 'parking' // We need to choose the model name
+        modelName: 'def_forma_pago' // We need to choose the model name
     });
 
-    return Parking;
+    return def_forma_pago;
 }

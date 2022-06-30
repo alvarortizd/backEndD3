@@ -2,46 +2,46 @@ const { connect } = require('../config/db.config');
 const logger = require('../logger/api.logger');
 
 
-class ParkingRepository {
+class mov_asignar_lugar_posicionRepository {
 
     db = {};
 
     constructor() {
         this.db = connect();
         // For Development
-      //  this.db.sequelize.sync({ force: true }).then(() => {
+     //   this.db.sequelize.sync({ force: true }).then(() => {
      //       console.log("Drop and re-sync db.");
-     //   });
+      //  });
     }
 
-    async getParking() {
+    async getMov_asignar_lugar_posicion() {
 
         try {
-            const parking = await this.db.parking.findAll();
-            console.log('tasks:::', parking);
-            return parking;
+            const mov_asignar_lugar_posicionRepository = await this.db.mov_asignar_lugar_posicion.findAll();
+            console.log('tasks:::', mov_asignar_lugar_posicionRepository);
+            return mov_asignar_lugar_posicionRepository;
         } catch (err) {
             console.log(err);
             return [];
         }
     }
 
-    async createParking(parking) {
+    async createMov_asignar_lugar_posicion(lugar) {
         let data = {};
         try {
-            data = await this.db.parking.create(parking);
+            data = await this.db.mov_asignar_lugar_posicion.create(lugar);
         } catch(err) {
             logger.error('Error::' + err);
         }
         return data;
     }
 
-    async updateParking(parking) {
+    async updateMov_asignar_lugar_posicion(lugar) {
         let data = {};
         try {
-            data = await this.db.parking.update({...parking}, {
+            data = await this.db.mov_asignar_lugar_posicion.update({...lugar}, {
                 where: {
-                    id: parking.id
+                    id_asignar: lugar.id_asignar
                 }
             });
         } catch(err) {
@@ -50,12 +50,12 @@ class ParkingRepository {
         return data;
     }
 
-    async deleteParking(parkingId) {
+    async deleteMov_asignar_lugar_posicion(lugarId) {
         let data = {};
         try {
-            data = await this.db.parking.destroy({
+            data = await this.db.mov_asignar_lugar_posicion.destroy({
                 where: {
-                    id: parkingId
+                    id_asignar: lugarId
                 }
             });
         } catch(err) {
@@ -67,4 +67,4 @@ class ParkingRepository {
 
 }
 
-module.exports = new ParkingRepository();
+module.exports = new mov_asignar_lugar_posicionRepository();
